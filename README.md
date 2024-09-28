@@ -1,4 +1,4 @@
-## Hackthon Fiap - Curso Coding & Tech Journey From User to Creator / Pós tech - Pós Tech - 2CTJT
+## Hackthon Fiap - Curso Coding & Tech Journey From User to Creator / Pós tech - 2CTJT
 
 Grupo D
 
