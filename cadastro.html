@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="cadastro.css">
+</head>
+<body>
+    <div class="navbar">
+        <h1 class="navbar-brand">EduLearn</h1>
+    </div>
+
+    <div class="container">
+        <h2>Cadastro</h2>
+        <form id="cadastroForm" onsubmit="return validarFormulario(event)">
+            <div class="form-group">
+                <label for="nome">Nome:</label>
+                <input type="text" id="nome" class="form-control" required placeholder="Informe nome e sobrenome">
+            </div>
+            <div class="form-group">
+                <label for="cpf">CPF:</label>
+                <input type="text" id="cpf" class="form-control" required placeholder="Formato: 000.000.000-00" oninput="mascaraCPF(this)">
+            </div>
+            <div class="form-group">
+                <label for="email">E-mail:</label>
+                <input type="email" id="email" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="senha">Senha:</label>
+                <input type="password" id="senha" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="confirmaSenha">Confirme sua senha:</label>
+                <input type="password" id="confirmaSenha" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="categoria">Informe sua categoria:</label>
+                <select id="categoria" class="form-control" required onchange="toggleProfessorVinculado()">
+                    <option value="" disabled selected>Selecione uma opção</option>
+                    <option value="Aluno">Aluno</option>
+                    <option value="Professor">Professor</option>
+                </select>
+            </div>
+
+            <!-- Div para o campo "Professor Vinculado" -->
+            <div id="professorVinculadoDiv" class="form-group" style="display: none;">
+                <label for="professorVinculado">Professor Vinculado:</label>
+                <select id="professorVinculado" class="form-control">
+                    <option value="" disabled selected>Selecione um professor</option>
+                </select>
+            </div>
+
+            <div id="mensagemErro" class="error-message"></div>
+            <button type="submit" class="btn btn-primary">Cadastrar</button>
+        </form>
+
+        <!-- Botão de Voltar -->
+        <div class="voltar">
+            <button onclick="voltarLogin()" class="btn btn-secondary">Voltar</button>
+        </div>
+    </div>
+
+    <!-- Scripts do Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+    
+    <!-- Carregando a configuração do Firebase -->
+    <script src="cadastro.js"></script>
+
+    <!-- Código Principal -->
+    <script>
+ async function validarFormulario(event) {
+    event.preventDefault(); // Prevenir o envio do formulário
+    const nome = document.getElementById('nome').value.trim();
+    const cpf = document.getElementById('cpf').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const senha = document.getElementById('senha').value;
+    const confirmaSenha = document.getElementById('confirmaSenha').value;
+    const categoria = document.getElementById('categoria').value;
+    const professorVinculado = document.getElementById('professorVinculado').value;
+    const mensagemErro = document.getElementById('mensagemErro');
+
+    // Validações
+    const nomePartes = nome.split(' ');
+    if (nomePartes.length < 2 || nomePartes.some(parte => parte.length < 2)) {
+        mensagemErro.textContent = "Por favor, informe nome e sobrenome.";
+        return false;
+    }
+
+    const cpfRegex = /^\d{3}\.\d{3}\.\d{3}-\d{2}$/;
+    if (!cpfRegex.test(cpf)) {
+        mensagemErro.textContent = "CPF inválido. Formato correto: 000.000.000-00.";
+        return false;
+    }
+
+    if (senha !== confirmaSenha) {
+        mensagemErro.textContent = "As senhas não coincidem. Por favor, corrija.";
+        return false;
+    }
+
+    try {
+        console.log('Iniciando processo de cadastro do usuário...');
+        
+        // Criar usuário no Firebase Authentication
+        const userCredential = await auth.createUserWithEmailAndPassword(email, senha);
+        const userId = userCredential.user.uid;
+        console.log('Usuário criado com sucesso no Firebase Authentication. UID:', userId);
+
+        // Dados do usuário para o Firestore
+        let userData = {
+            id: userId,
+            nome: nome,
+            cpf: cpf,
+            email: email,
+            categoria: categoria,
+        };
+
+        // Adiciona o campo "Professor Vinculado" se a categoria for "Aluno"
+        if (categoria === 'Aluno' && professorVinculado) {
+            userData.professorVinculado = professorVinculado;
+            console.log('Aluno vinculado ao professor:', professorVinculado);
+        }
+
+        // Salvar os dados do usuário no Firestore Database
+        await db.collection('usuarios').doc(userId).set(userData);
+        console.log('Usuário salvo com sucesso no Firestore.');
+
+        // Exibir mensagem de sucesso e redirecionar
+        alert('Cadastro efetuado com sucesso!');
+        document.getElementById('cadastroForm').reset();
+        window.location.href = 'index.html'; // Redirecionar para a página de login
+    } catch (error) {
+        // Exibir mensagem de erro e log detalhado
+        console.error('Erro no processo de cadastro:', error);
+        mensagemErro.textContent = `Erro: ${error.message}`;
+        return false;
+    }
+
+    mensagemErro.textContent = '';
+    return true;
+}
+
+        function mascaraCPF(campo) {
+            let valor = campo.value.replace(/\D/g, '');
+            if (valor.length > 11) {
+                valor = valor.slice(0, 11);
+            }
+            valor = valor.replace(/(\d{3})(\d)/, '$1.$2');
+            valor = valor.replace(/(\d{3})(\d)/, '$1.$2');
+            valor = valor.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+            campo.value = valor;
+        }
+
+        function voltarLogin() {
+            window.location.href = 'index.html';
+        }
+
+        function toggleProfessorVinculado() {
+            const categoria = document.getElementById('categoria').value;
+            const professorVinculadoDiv = document.getElementById('professorVinculadoDiv');
+            
+            if (categoria === 'Aluno') {
+                professorVinculadoDiv.style.display = 'block';
+            } else {
+                professorVinculadoDiv.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
