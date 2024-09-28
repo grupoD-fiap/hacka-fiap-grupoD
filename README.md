@@ -5,7 +5,9 @@ Grupo D
 Integrantes:
 
 André Luiz Araújo Lemes - RM 352826 - andrelzalemes@gmail.com
+
 Eduardo Cardoso Mendes - RM 352837 - educar.mendes@gmail.com
+
 Nilton Soares Pinheiro - RM 352784 - nil1932003@gmail.com
 
 # EduLearn - Plataforma de Aprendizado Digital
