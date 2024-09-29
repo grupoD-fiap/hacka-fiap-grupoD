@@ -197,14 +197,23 @@ Logins utilizados para desenvolvimento e testes:
 Para executar o sistema é preciso seguir os passos abaixos:
 
 1 - Fazer o download no node.js
+
 2 - Criar uma pasta local e salvar os arquivos deste trabalho
+
 3 - Iniciar o Visual Studio Code e abrir a pasta em que os arquivos foram salvos
+
 4 - Abrir o terminal e executar os comandos abaixo para poder integrar o projeto com o Firebase:
+
 npm init -y
+
 npm i -D firebase-tools
+
 npx firebase login
+
 npx firebase experiments:enable webframeworks
+
 npx firebase init hosting
+
 npm install firebase
 
 ## Vídeo demonstrativo do Projeto
