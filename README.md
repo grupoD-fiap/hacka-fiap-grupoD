@@ -22,10 +22,9 @@ EduLearn é uma plataforma dedicada ao aprendizado digital que visa transformar 
 - [Requisitos Não Funcionais](#requisitos-não-funcionais)
 - [User Stories](#user-stories)
 - [Critérios de Avaliação do Projeto](#critérios-de-avaliação-do-projeto)
+- [Documentação do Projeto](#documenta%C3%A7%C3%A3o-do-projeto)
 - [Usuário de Desenvolvimento](#usuário-de-desenvolvimento)
-- [Configuração das Chaves de Acesso](#configuração-das-chaves-de-acesso)
 - [Execução do Projeto](#execução-do-projeto)
-- [Exemplo de Arquivos de Configuração](#exemplo-de-arquivos-de-configuração)
 - [Vídeo demonstrativo do projeto](#v%C3%ADdeo-demonstrativo-do-projeto).
 
 ## Contexto do Problema
