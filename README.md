@@ -26,6 +26,7 @@ EduLearn é uma plataforma dedicada ao aprendizado digital que visa transformar 
 - [Configuração das Chaves de Acesso](#configuração-das-chaves-de-acesso)
 - [Execução do Projeto](#execução-do-projeto)
 - [Exemplo de Arquivos de Configuração](#exemplo-de-arquivos-de-configuração)
+- [Video demonstrativo do projeto](#v%C3%ADdeo-demonstrativo-do-projeto).
 
 ## Contexto do Problema
 
