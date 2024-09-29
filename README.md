@@ -149,6 +149,7 @@ Nesta tela o usuario tambem poderá utilizar a funcção "Esqueci minha senha" o
 E tambem utilizar a função de cadastre-se onde o usuário será enviado para tela de Cadastro da plataforma.
 
 Nesta tela os arquivos utilizados são:
+
 index.html
 
 index.css
@@ -162,6 +163,7 @@ Na tela de Cadstro serve o usuario deverá preencher seus cados cadastrais e sel
 Esta tela tem integração com Firebade Authentication e com o Firestone Database no banco de dados de usuários, desta forma via o ID o sistema consegue alem de autenticar o usuario tambem determinar seu perfil e para qual tela será enviado após login. 
 
 Nesta tela os arquivos utilizados são:
+
 cadastro.html
 
 cadastro.css
@@ -175,8 +177,11 @@ Na tela de Professor, o usuário com perfil de Professor poderá consultar, cada
 Os link dos videos são cadastrados são slavos no Firestone Database no banco de dados videoAulas.
 
 Nesta tela os arquivos utilizados são:
+
 professor.html
+
 styles.css está dentro pasta css
+
 professor.js está dentro pasta js
 
 4. Tela - Aluno:
@@ -184,6 +189,7 @@ professor.js está dentro pasta js
 Na tela de Alunos, o usuário com perfil de PAluno poderá Assistir os videos cadastrados na plataforma pelo professor vinculado que ele selecionou no seu cadastro.
 
 Nesta tela os arquivos utilizados são:
+
 aluno.html
 
 styles.css está dentro pasta css
