@@ -150,7 +150,9 @@ E tambem utilizar a função de cadastre-se onde o usuário será enviado para t
 
 Nesta tela os arquivos utilizados são:
 index.html
+
 index.css
+
 index.js
 
 2. Tela - Cadastro:
@@ -161,7 +163,9 @@ Esta tela tem integração com Firebade Authentication e com o Firestone Databas
 
 Nesta tela os arquivos utilizados são:
 cadastro.html
+
 cadastro.css
+
 cadastro.js
 
 3. Tela - Professor:
@@ -181,7 +185,9 @@ Na tela de Alunos, o usuário com perfil de PAluno poderá Assistir os videos ca
 
 Nesta tela os arquivos utilizados são:
 aluno.html
+
 styles.css está dentro pasta css
+
 aluno.js está dentro pasta js
 
 ## Usuário de Desenvolvimento
